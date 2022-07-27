@@ -10,3 +10,15 @@ func Soma(numeros []int) int {
 
 	return soma
 }
+
+func SomaTudo(numerosParaSomar ...[]int) (somas []int) {
+
+	quantidadeDeNumeros := len(numerosParaSomar)
+	somas = make([]int, quantidadeDeNumeros)
+
+	for i, numeros := range numerosParaSomar {
+		somas[i] = Soma(numeros)
+	}
+
+	return
+}
