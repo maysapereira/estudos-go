@@ -1,4 +1,4 @@
-package main
+package generics
 
 import "fmt"
 
@@ -21,10 +21,10 @@ func sum[V int64 | float64](m []V) V {
 	// retorna valor de s
 }
 
-func main() {
+func generics() {
 	ints := []int64{1, 2, 3, 4, 5}
 	floats := []float64{10.3, 3.7, 5.14, 3.14}
 
-	fmt.Println("soma int64:", sum[int64](ints))
-	fmt.Println("soma float64:", sum[float64](floats))
+	fmt.Println("soma int64:", sum(ints))
+	fmt.Println("soma float64:", sum(floats))
 }
