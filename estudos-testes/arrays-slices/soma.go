@@ -11,12 +11,13 @@ func Soma(numeros []int) int {
 	return soma
 }
 
-func SomaTudo(numerosParaSomar ...[]int) []int {
+func SomaTodoOResto(numerosParaSomar ...[]int) []int {
 
 	var somas []int
 
 	for _, numeros := range numerosParaSomar {
-		somas = append(somas, Soma(numeros))
+		final := numeros[1:]
+		somas = append(somas, Soma(final))
 	}
 
 	return somas
