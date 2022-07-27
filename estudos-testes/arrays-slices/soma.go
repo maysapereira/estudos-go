@@ -1,6 +1,6 @@
 package main
 
-func Soma(numeros [5]int) int {
+func Soma(numeros []int) int {
 
 	soma := 0
 
