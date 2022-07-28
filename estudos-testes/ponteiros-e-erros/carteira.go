@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Bitcoin int
 
@@ -24,6 +27,11 @@ func (c *Carteira) Saldo() Bitcoin {
 	return c.saldo
 }
 
-func (c *Carteira) Sacar(quantidade Bitcoin) {
+func (c *Carteira) Sacar(quantidade Bitcoin) error {
+	if quantidade > c.saldo {
+		return errors.New("eita")
+	}
+
 	c.saldo -= quantidade
+	return nil
 }
