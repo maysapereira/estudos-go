@@ -1,13 +1,29 @@
 package main
 
-type Carteira struct {
-	saldo int
+import "fmt"
+
+type Bitcoin int
+
+func (b Bitcoin) String() string {
+	return fmt.Sprintf("%d BTC", b)
 }
 
-func (c *Carteira) Depositar(quantidade int) {
+type Stringer interface {
+	String() string
+}
+
+type Carteira struct {
+	saldo Bitcoin
+}
+
+func (c *Carteira) Depositar(quantidade Bitcoin) {
 	c.saldo += quantidade
 }
 
-func (c *Carteira) Saldo() int {
+func (c *Carteira) Saldo() Bitcoin {
 	return c.saldo
+}
+
+func (c *Carteira) Sacar(quantidade Bitcoin) {
+	c.saldo -= quantidade
 }
