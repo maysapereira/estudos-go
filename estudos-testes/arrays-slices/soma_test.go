@@ -43,5 +43,3 @@ func TesteSomaTodoOResto(t *testing.T) {
 	})
 
 }
-
-//commit de teste
