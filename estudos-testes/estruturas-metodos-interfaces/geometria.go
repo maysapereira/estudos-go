@@ -1,10 +1,15 @@
 package main
 
-func Perimetro(largura float64, altura float64) float64 {
-	return 2 * (largura + altura)
+func Perimetro(retangulo Retangulo) float64 {
+	return 2 * (retangulo.Largura + retangulo.Altura)
 }
 
-func Area(largura float64, altura float64) float64 {
-	return largura + altura
+func Area(retangulo Retangulo) float64 {
+	return retangulo.Largura + retangulo.Altura
 
+}
+
+type Retangulo struct {
+	Largura float64
+	Altura  float64
 }
