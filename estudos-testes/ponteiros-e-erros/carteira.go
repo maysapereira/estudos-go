@@ -29,7 +29,7 @@ func (c *Carteira) Saldo() Bitcoin {
 
 func (c *Carteira) Sacar(quantidade Bitcoin) error {
 	if quantidade > c.saldo {
-		return errors.New("eita")
+		return errors.New("não é possível retirar: saldo insuficiente")
 	}
 
 	c.saldo -= quantidade
