@@ -35,3 +35,27 @@ func comparaErro(t *testing.T, resultado, esperado error) {
 		t.Errorf("resultado erro '%s', esperado '%s'", resultado, esperado)
 	}
 }
+
+func TestAdiciona(t *testing.T) {
+	dicionario := Dicionario{}
+	palavra := "teste"
+	definicao := "isso é apenas um teste"
+
+	dicionario.Adiciona(palavra, definicao)
+
+	comparaDenificao(t, dicionario, palavra, definicao)
+}
+
+func comparaDenificao(t *testing.T, dicionario Dicionario, palavra, definicao string) {
+	t.Helper()
+
+	resultado, err := dicionario.Busca(palavra)
+
+	if err != nil {
+		t.Fatal("deveria ter encontrado palavra adicionada:", err)
+	}
+
+	if definicao != resultado {
+		t.Errorf("resultado '%s', esperado '%s'", resultado, definicao)
+	}
+}

@@ -15,3 +15,7 @@ func (d Dicionario) Busca(palavra string) (string, error) {
 
 	return definicao, nil
 }
+
+func (d Dicionario) Adiciona(palavra, definicao string) {
+	d[palavra] = definicao
+}
