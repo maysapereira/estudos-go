@@ -1,13 +1,6 @@
 package main
 
-import "errors"
-
 type Dicionario map[string]string
-
-var (
-	ErrNaoEncontrado    = errors.New("não foi possível encontar a palavra que você procura")
-	ErrPalavraExistente = errors.New("não é possível adicionar a palavra pois ela já existe")
-)
 
 func (d Dicionario) Busca(palavra string) (string, error) {
 	definicao, existe := d[palavra]
@@ -32,4 +25,15 @@ func (d Dicionario) Adiciona(palavra, definicao string) error {
 	}
 
 	return nil
+}
+
+const (
+	ErrNaoEncontrado    = ErrDicionario("não foi possível encontar a palavra que você procura")
+	ErrPalavraExistente = ErrDicionario("não é possível adicionar a palavra pois ela já existe")
+)
+
+type ErrDicionario string
+
+func (e ErrDicionario) Error() string {
+	return string(e)
 }
