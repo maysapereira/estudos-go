@@ -1,5 +1,7 @@
 package main
 
-func Busca(dicionario map[string]string, palavra string) string {
-	return dicionario[palavra]
+type Dicionario map[string]string
+
+func (d Dicionario) Busca(palavra string) string {
+	return d[palavra]
 }
