@@ -1,10 +1,15 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
+	"io"
+	"os"
 )
 
-func Contagem(saida *bytes.Buffer) {
+func Contagem(saida io.Writer) {
 	fmt.Fprint(saida, "3")
+}
+
+func main() {
+	Contagem(os.Stdout)
 }
