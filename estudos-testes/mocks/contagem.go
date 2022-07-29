@@ -7,19 +7,26 @@ import (
 	"time"
 )
 
+// Sleeper te permite definir pausas
 type Sleeper interface {
 	Pausa()
 }
 
-type SleeperPadrao struct{}
+// SleeperConfiguravel é uma implementação de Sleepr com uma pausa definida
+type SleeperConfiguravel struct {
+	duracao time.Duration
+	pausa   func(time.Duration)
+}
 
-func (d *SleeperPadrao) Pausa() {
-	time.Sleep(1 * time.Second)
+// Pausa vai pausar a execução pela Duração definida
+func (s *SleeperConfiguravel) Pausa() {
+	s.pausa(s.duracao)
 }
 
 const ultimaPalavra = "Vai!"
 const inicioContagem = 3
 
+// Contagem imprime uma contagem de 3 para a saída com um atraso determinado por um Sleeper
 func Contagem(saida io.Writer, sleeper Sleeper) {
 	for i := inicioContagem; i > 0; i-- {
 		sleeper.Pausa()
@@ -31,6 +38,6 @@ func Contagem(saida io.Writer, sleeper Sleeper) {
 }
 
 func main() {
-	sleeper := &SleeperPadrao{}
+	sleeper := &SleeperConfiguravel{1 * time.Second, time.Sleep}
 	Contagem(os.Stdout, sleeper)
 }
