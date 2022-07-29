@@ -11,7 +11,7 @@ func TestContagem(t *testing.T) {
 	Contagem(buffer)
 
 	resultado := buffer.String()
-	esperado := "3"
+	esperado := `321Go!`
 
 	if resultado != esperado {
 		t.Errorf("resultado '%s', esperado '%s'", resultado, esperado)

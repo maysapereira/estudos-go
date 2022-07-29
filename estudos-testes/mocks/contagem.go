@@ -6,8 +6,15 @@ import (
 	"os"
 )
 
+const ultimaPalavra = "Go!"
+const inicioContagem = 3
+
 func Contagem(saida io.Writer) {
-	fmt.Fprint(saida, "3")
+	for i := inicioContagem; i > 0; i-- {
+		fmt.Fprint(saida, i)
+	}
+
+	fmt.Fprint(saida, ultimaPalavra)
 }
 
 func main() {
