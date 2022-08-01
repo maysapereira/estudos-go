@@ -1,21 +1,37 @@
 package main
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestPercorre(t *testing.T) {
-	esperado := "Maysa"
 
-	var resultado []string
+	casos := []struct {
+		Nome              string
+		Entrada           interface{}
+		ChamadasEsperadas []string
+	}{
+		{
+			"Struct com dois campos tipo string",
+			struct {
+				Nome   string
+				Cidade string
+			}{"Maysa", "Rio de Janeiro"}, []string{"Maysa", "Rio de Janeiro"},
+		},
+	}
 
-	x := struct {
-		Nome string
-	}{esperado}
+	for _, teste := range casos {
+		t.Run(teste.Nome, func(t *testing.T) {
+			var resultado []string
 
-	percorre(x, func(entrada string) {
-		resultado = append(resultado, entrada)
-	})
+			percorre(teste.Entrada, func(entrada string) {
+				resultado = append(resultado, entrada)
+			})
 
-	if len(resultado) != 1 {
-		t.Errorf("número incorreto de chamadas de função: resultado %d, esperado %d", len(resultado), 1)
+			if !reflect.DeepEqual(resultado, teste.ChamadasEsperadas) {
+				t.Errorf("resultado %v, esperado %v", resultado, teste.ChamadasEsperadas)
+			}
+		})
 	}
 }

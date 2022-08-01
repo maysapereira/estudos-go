@@ -1,5 +1,12 @@
 package main
 
+import "reflect"
+
 func percorre(x interface{}, fn func(entrada string)) {
-	fn("Ainda não acredito que o Brasil perdeu de 7 a 1")
+	valor := reflect.ValueOf(x)
+
+	for i := 0; i < valor.NumField(); i++ {
+		campo := valor.Field(i)
+		fn(campo.String())
+	}
 }
