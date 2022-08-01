@@ -65,14 +65,6 @@ func TestPercorre(t *testing.T) {
 			},
 			[]string{"São Paulo", "Pará"},
 		},
-		{
-			"Maps",
-			map[string]string{
-				"Foo": "Bar",
-				"Baz": "Boz",
-			},
-			[]string{"Bar", "Boz"},
-		},
 	}
 
 	for _, teste := range casos {
@@ -88,6 +80,22 @@ func TestPercorre(t *testing.T) {
 			}
 		})
 	}
+
+	t.Run("com maps", func(t *testing.T) {
+		mapA := map[string]string{
+			"Foo": "Bar",
+			"Baz": "Boz",
+		}
+
+		var resultado []string
+		percorre(mapA, func(entrada string) {
+			resultado = append(resultado, entrada)
+		})
+
+		verificaSeContem(t, resultado, "Bar")
+		verificaSeContem(t, resultado, "Boz")
+	})
+
 }
 
 type Pessoa struct {

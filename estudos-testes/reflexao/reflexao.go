@@ -2,6 +2,7 @@ package main
 
 import (
 	"reflect"
+	"testing"
 )
 
 func percorre(x interface{}, fn func(entrada string)) {
@@ -38,4 +39,18 @@ func obtemValor(x interface{}) reflect.Value {
 	}
 
 	return valor
+}
+
+func verificaSeContem(t *testing.T, palheiro []string, agulha string) {
+	contem := false
+
+	for _, x := range palheiro {
+		if x == agulha {
+			contem = true
+		}
+	}
+
+	if !contem {
+		t.Errorf("esperava-se que %+v contivesse '%s', mas não continha", palheiro, agulha)
+	}
 }
