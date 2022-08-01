@@ -9,8 +9,14 @@ func TestContador(t *testing.T) {
 		contador.Incrementa()
 		contador.Incrementa()
 
-		if contador.Valor() != 3 {
-			t.Errorf("resultado %d, esperado %d", contador.Valor(), 3)
-		}
+		verificaContador(t, contador, 3)
+
 	})
+}
+
+func verificaContador(t *testing.T, resultado Contador, esperado int) {
+	t.Helper()
+	if resultado.Valor() != esperado {
+		t.Errorf("resultado %d, esperado %d", resultado.Valor(), 3)
+	}
 }
