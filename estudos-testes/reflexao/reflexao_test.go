@@ -33,6 +33,14 @@ func TestPercorre(t *testing.T) {
 				Idade int
 			}{"Maysa", 22}, []string{"Maysa"},
 		},
+		{
+			"Campos aninhados",
+			Pessoa{
+				"Maysa",
+				Perfil{22, "Rio de Janeiro"},
+			},
+			[]string{"Maysa", "Rio de Janeiro"},
+		},
 	}
 
 	for _, teste := range casos {
@@ -48,4 +56,14 @@ func TestPercorre(t *testing.T) {
 			}
 		})
 	}
+}
+
+type Pessoa struct {
+	Nome   string
+	Perfil Perfil
+}
+
+type Perfil struct {
+	Idade  int
+	Cidade string
 }
