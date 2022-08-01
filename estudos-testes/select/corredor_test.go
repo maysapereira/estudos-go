@@ -8,22 +8,19 @@ import (
 )
 
 func TestCorredor(t *testing.T) {
+	t.Run("retorna um erro se o servidor não responder dentro de 10s", func(t *testing.T) {
+		servidorA := criarServidorComAtraso(11 * time.Second)
+		servidorB := criarServidorComAtraso(12 * time.Second)
 
-	servidorLento := criarServidorComAtraso(20 * time.Millisecond)
-	servidorRapido := criarServidorComAtraso(0 * time.Millisecond)
+		defer servidorA.Close()
+		defer servidorB.Close()
 
-	defer servidorLento.Close()
-	defer servidorRapido.Close()
+		_, err := Corredor(servidorA.URL, servidorB.URL)
 
-	URLLenta := servidorLento.URL
-	URLRapida := servidorRapido.URL
-
-	esperado := URLRapida
-	resultado := Corredor(URLLenta, URLRapida)
-
-	if resultado != esperado {
-		t.Errorf("resultado '%s', esperado '%s'", resultado, esperado)
-	}
+		if err == nil {
+			t.Error("esperava um erro, mas não obtive um")
+		}
+	})
 }
 
 func criarServidorComAtraso(atraso time.Duration) *httptest.Server {
