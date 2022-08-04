@@ -43,9 +43,9 @@ func main() {
 
 	t := coloredTriangle{triangle{3}, "blue"}
 	fmt.Println("Perimeter (triangle):", t.perimeter())
-	fmt.Println("Size:", t.size)
+	fmt.Println("Size (triangle):", t.size)
 
 	s := coloredSquare{square{4}, "red"}
 	fmt.Println("Perimeter (square):", s.perimeter())
-	fmt.Println("Size:", s.size)
+	fmt.Println("Size (square):", s.size)
 }
