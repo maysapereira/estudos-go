@@ -11,8 +11,8 @@ func main() {
 	ch := make(chan string, size)
 	send(ch, "one")
 	send(ch, "two")
-	send(ch, "three")
-	send(ch, "four")
+	go send(ch, "three")
+	go send(ch, "four")
 	fmt.Println("All data sent to the channel ...")
 
 	for i := 0; i < size; i++ {
