@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func fib(number float64) float64 {
+func fib(number float64, ch chan string) {
 	x, y := 1.0, 1.0
 
 	for i := 0; i < int(number); i++ {
@@ -16,15 +16,21 @@ func fib(number float64) float64 {
 	r := rand.Intn(3)
 	time.Sleep(time.Duration(r) * time.Second)
 
-	return x
+	ch <- fmt.Sprintf("Fib(%v): %v\n", number, x)
 }
 
 func main() {
 	start := time.Now()
 
-	for i := 1; i < 15; i++ {
-		n := fib(float64(i))
-		fmt.Printf("Fib(%v): %v\n", i, n)
+	size := 15
+	ch := make(chan string, size)
+
+	for i := 0; i < size; i++ {
+		go fib(float64(i), ch)
+	}
+
+	for i := 0; i < size; i++ {
+		fmt.Printf(<-ch)
 	}
 
 	elapsed := time.Since(start)
