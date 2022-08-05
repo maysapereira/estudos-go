@@ -1,38 +1,26 @@
 package main
 
-import (
-	"fmt"
-	"math/rand"
-	"time"
-)
+import "fmt"
 
-func fib(number float64, ch chan string) {
-	x, y := 1.0, 1.0
-
-	for i := 0; i < int(number); i++ {
-		x, y = y, x+y
+func fibonacci(n int) []int {
+	if n < 2 {
+		return make([]int, 0)
 	}
 
-	r := rand.Intn(3)
-	time.Sleep(time.Duration(r) * time.Second)
+	nums := make([]int, n)
+	nums[0], nums[1] = 1, 1
 
-	ch <- fmt.Sprintf("Fib(%v): %v\n", number, x)
+	for i := 2; i < n; i++ {
+		nums[i] = nums[i-1] + nums[i-2]
+	}
+
+	return nums
 }
 
 func main() {
-	start := time.Now()
+	var num int
 
-	size := 15
-	ch := make(chan string, size)
-
-	for i := 0; i < size; i++ {
-		go fib(float64(i), ch)
-	}
-
-	for i := 0; i < size; i++ {
-		fmt.Printf(<-ch)
-	}
-
-	elapsed := time.Since(start)
-	fmt.Printf("Done! It took %v seconds!\n", elapsed.Seconds())
+	fmt.Print("What's the Fibonacci sequence you want? ")
+	fmt.Scanln(&num)
+	fmt.Println("The Fibonacci sequence is:", fibonacci(num))
 }
