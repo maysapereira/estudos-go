@@ -1,19 +1,18 @@
 package main
 
 import (
-	"log"
-	"os"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 )
 
 func main() {
-	file, err := os.OpenFile("info.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 
-	if err != nil {
-		log.Fatal(err)
-	}
+	log.Debug().
+		Int("EnployeeID", 1001).
+		Msg("Getting employee information")
 
-	defer file.Close()
-
-	log.SetOutput(file)
-	log.Print("Hey, I'm a log!")
+	log.Debug().
+		Str("Name", "Maysa").
+		Send()
 }
