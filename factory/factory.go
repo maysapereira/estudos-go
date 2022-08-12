@@ -1,13 +1,10 @@
-package main
+// package main
 
-import (
-	"estudos/estudos-go/estudos/factory/test"
-	"fmt"
-)
+// import (
+// 	"estudos/estudos-go/estudos/factory/test"
+// 	"fmt"
+// )
 
-func main() {
-	c := test.NewCar()
+// func main() {
 
-	c.DefineQtdRodas(-20)
-	fmt.Println(c)
-}
+// }
